@@ -43,7 +43,7 @@ public class Blackjack {
             Card dealerFirstCard = game.getHand("dealer").get(0);
             while (true) {
                 sum = game.sumHand(playerHand);
-                System.out.printf("Your hand: %s\nTotal: %d\n\n", playerHand, sum);
+                System.out.printf("\nYour hand: %s\nTotal: %d\n\n", playerHand, sum);
                 System.out.printf("Dealer Hand: [%s, unknown]\n\n", dealerFirstCard);
 
                 if (sum > 21) {
@@ -72,6 +72,7 @@ public class Blackjack {
 
             profit += game.determineWinner()*wager;
 
+            System.out.printf("\nCurrent profit: %s$%d\u001B[0m\n", profit < 0 ? "\u001B[31m-" : "\u001B[32m", Math.abs(profit));
             System.out.printf("Play Again? (y/N): ");
             String playAgain;
             while (!"yn".contains(playAgain = s.nextLine().toLowerCase())) {
@@ -81,7 +82,7 @@ public class Blackjack {
         }
 
         s.close();
-        System.out.printf("\nYour profit: %s$%d\u001B[0m\n", profit < 0 ? "\u001B[31m-" : "\u001B[32m", Math.abs(profit));
+        System.out.printf("\nFinal profit: %s$%d\u001B[0m\n", profit < 0 ? "\u001B[31m-" : "\u001B[32m", Math.abs(profit));
     }
 }
 
@@ -176,7 +177,7 @@ class Game {
         }
         if (dealerSum < 17) {
             System.out.println("Dealer Move: Hit");
-            System.out.printf("Dealer got the %s\n", addCard(dealerHand));
+            System.out.printf("Dealer got the %s\n\n", addCard(dealerHand));
             dealerMove();
         } else if (dealerSum <= 21){
             System.out.println("Dealer Move: Stand");
